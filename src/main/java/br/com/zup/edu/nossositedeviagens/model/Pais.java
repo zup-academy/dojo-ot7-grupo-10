@@ -21,4 +21,8 @@ public class Pais {
     }
     @Deprecated
     public Pais(){}
+
+    public Long getId() {
+        return this.id;
+    }
 }
