@@ -31,4 +31,8 @@ public class Companhia {
     @Deprecated
     public Companhia() {
     }
+
+    public Long getId() {
+        return id;
+    }
 }
