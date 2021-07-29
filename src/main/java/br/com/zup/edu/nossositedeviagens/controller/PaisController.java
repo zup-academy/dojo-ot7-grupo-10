@@ -1,14 +1,14 @@
 package br.com.zup.edu.nossositedeviagens.controller;
 
+import br.com.zup.edu.nossositedeviagens.dto.PaisRequest;
 import br.com.zup.edu.nossositedeviagens.model.Pais;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import br.com.zup.edu.nossositedeviagens.repository.PaisRepository;
 
 import javax.validation.Valid;
+import java.net.URI;
 
 @RestController
 @RequestMapping("/pais")
@@ -18,9 +18,11 @@ public class PaisController {
     private PaisRepository repository;
 
     @PostMapping
-    public void cadastrar(@RequestBody @Valid PaisRequest req) {
+    public ResponseEntity<?> cadastrar(@RequestBody @Valid PaisRequest req) {
         Pais pais = req.criaPais();
-
+        repository.save(pais);
+        URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(pais.getId()).toUri();
+        return ResponseEntity.created().build();
     }
 
 }
