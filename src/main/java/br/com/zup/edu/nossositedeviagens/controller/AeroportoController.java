@@ -2,7 +2,7 @@ package br.com.zup.edu.nossositedeviagens.controller;
 
 import br.com.zup.edu.nossositedeviagens.dto.AeroportoRequest;
 import br.com.zup.edu.nossositedeviagens.model.Aeroporto;
-import br.com.zup.edu.nossositedeviagens.repository.CompanhiaRepository;
+import br.com.zup.edu.nossositedeviagens.repository.AeroportoRepository;
 import br.com.zup.edu.nossositedeviagens.repository.PaisRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +21,11 @@ public class AeroportoController {
 
     private final PaisRepository paisRepository;
 
-    public AeroportoController(PaisRepository paisRepository) {
+    private final AeroportoRepository aeroportoRepository;
+
+    public AeroportoController(PaisRepository paisRepository, AeroportoRepository aeroportoRepository) {
         this.paisRepository = paisRepository;
+        this.aeroportoRepository = aeroportoRepository;
     }
 
     @PostMapping
@@ -33,8 +36,8 @@ public class AeroportoController {
             return ResponseEntity.badRequest().build();
         }
 
-        companhiaRepository.save(companhia.get());
-        URI uri = uriBuilder.path("/companhia/{id}").buildAndExpand(companhia.get().getId()).toUri();
+        aeroportoRepository.save(aeroporto.get());
+        URI uri = uriBuilder.path("/aeroporto/{id}").buildAndExpand(aeroporto.get().getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 }

@@ -30,4 +30,12 @@ public class CompanhiaRequest {
 
         return Optional.empty();
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public Long getPaisId() {
+        return paisId;
+    }
 }

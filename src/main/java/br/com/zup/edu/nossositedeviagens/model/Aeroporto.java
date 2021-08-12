@@ -23,4 +23,8 @@ public class Aeroporto {
         this.nome = nome;
         this.pais = pais;
     }
+
+    public Long getId() {
+        return this.id;
+    }
 }
