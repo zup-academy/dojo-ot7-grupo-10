@@ -3,6 +3,7 @@ package br.com.zup.edu.nossositedeviagens.dto;
 import br.com.zup.edu.nossositedeviagens.model.Aeroporto;
 import br.com.zup.edu.nossositedeviagens.model.Rota;
 import br.com.zup.edu.nossositedeviagens.repository.AeroportoRepository;
+import br.com.zup.edu.nossositedeviagens.repository.RotaRepository;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -39,8 +40,15 @@ public class RotaRequest {
         Optional<Aeroporto> aeroOrigem = repository.findById(this.origem);
         Optional<Aeroporto> aeroDestino = repository.findById(this.destino);
         return new Rota(nome, aeroOrigem.get(), aeroDestino.get(), minutos);
-        
     }
 
+    public boolean rotaJaExistente(RotaRepository rotaRep){
+        Optional<Rota> exist= rotaRep.buscarRotaPorAeroportos(origem, destino);
+        return exist.isPresent();
+    }
+
+    public boolean mesmoAeroporto(){
+        return origem.equals(destino);
+    }
 
 }
