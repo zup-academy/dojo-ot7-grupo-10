@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RotaController {
 
     @PostMapping
-    public void cadastar(@RequestBody RotaRequest request) {
+    public void cadastrar(@RequestBody RotaRequest request) {
 
     }
 
